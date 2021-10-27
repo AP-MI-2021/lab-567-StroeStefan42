@@ -1,27 +1,29 @@
-def creeazaLibrarie(id, titlu, gen, pret, reducere):
 
-    return {
-        "id": id,
-        "titlu": titlu,
-        "gen": gen,
-        "pret": pret,
-        "reducere": reducere,
-    }
+def creeazaLibrarie(id, titlu, gen, pret, reducere):
+    list=[]
+    list.append(id)
+    list.append(titlu)
+    list.append(gen)
+    list.append(pret)
+    list.append(reducere)
+    return list
+
+
 
 def getId(librarie):
-    return librarie["id"]
+    return librarie[0]
 
 def getTitlu(librarie):
-    return librarie["titlu"]
+    return librarie[1]
 
 def getGen(librarie):
-    return librarie["gen"]
+    return librarie[2]
 
 def getPret(librarie):
-    return librarie["pret"]
+    return librarie[3]
 
 def getReducere(librarie):
-    return librarie["reducere"]
+    return librarie[4]
 
 def toString(librarie):
     return "Id: {}, Titlu: {}, Gen: {}, Pret: {}, Reducere: {}".format(

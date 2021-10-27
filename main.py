@@ -9,4 +9,5 @@ def main():
     lista = adaugaLibrarie("2", "Ion", "Realism", 20, "silver", lista)
     runMenu(lista)
 
-main()
+if __name__ == '__main__':
+    main()
