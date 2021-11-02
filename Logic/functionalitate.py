@@ -28,7 +28,7 @@ def discount(lista):
 def modificareGen(numeOriginal, numeSchimbat, lista):
     listaNoua = []
     for librarie in lista:
-        if numeOriginal == getGen(librarie):
+        if numeOriginal == getTitlu(librarie):
             librarieNoua = creeazaLibrarie(
                 getId(librarie),
                 getTitlu(librarie),

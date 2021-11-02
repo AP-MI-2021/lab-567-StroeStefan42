@@ -1,4 +1,4 @@
-from Domain.Librarie import toString
+from Domain.Librarie2 import toString
 from Logic.CRUD import adaugaLibrarie, stergeLibrarie, modificaLibrarie
 from Logic.functionalitate import discount, modificareGen
 
@@ -14,33 +14,45 @@ def printMenu():
 
 
 def uiAdaugaLibrarie(lista):
-    id = input("Dati id-ul: ")
-    titlu = input("Dati titlul: ")
-    gen = input("Dati genul: ")
-    pret = float(input('Dati pretul: '))
-    reducere = input("Dati tipul de reducere: ")
-    return adaugaLibrarie(id, titlu, gen, pret, reducere, lista)
+    try:
+        id = input("Dati id-ul: ")
+        titlu = input("Dati titlul: ")
+        gen = input("Dati genul: ")
+        pret = float(input('Dati pretul: '))
+        reducere = input("Dati tipul de reducere: ")
+        return adaugaLibrarie(id, titlu, gen, pret, reducere, lista)
+    except ValueError as ve:
+        print("Eroare: {}".format(ve))
+        return lista
 
 
 def uiStergeLibrarie(lista):
-    id = input("Dati id-ul cartii de sters: ")
-    return stergeLibrarie(id, lista)
+    try:
+        id = input("Dati id-ul cartii de sters: ")
+        return stergeLibrarie(id, lista)
+    except ValueError as ve:
+        print("Eroare: {}".format(ve))
+        return lista
 
 
 def uiModificaLibrarie(lista):
-    id = input("Dati id-ul cartii de modificat: ")
-    titlu = input("Dati noul titlu: ")
-    gen = input("Dati noul gen: ")
-    pret = float(input('Dati noul pret: '))
-    reducere =input("Dati noul tip de reducere: ")
-    return modificaLibrarie(id, titlu, gen, pret, reducere, lista)
+    try:
+        id = input("Dati id-ul cartii de modificat: ")
+        titlu = input("Dati noul titlu: ")
+        gen = input("Dati noul gen: ")
+        pret = float(input('Dati noul pret: '))
+        reducere =input("Dati noul tip de reducere: ")
+        return modificaLibrarie(id, titlu, gen, pret, reducere, lista)
+    except ValueError as ve:
+        print("Eroare: {}".format(ve))
+        return lista
 
 def uiDiscount(lista):
     return discount(lista)
 
 def uiModificareGen(lista):
-    numeOriginal=input("Dati genul care trebuie inlocuit")
-    numeSchimbat=input("Dati genul cu care se va inlocui")
+    numeOriginal=input("Dati titlul operei al carei gen se va modifica: ")
+    numeSchimbat=input("Dati genul cu care se va inlocui: ")
     return modificareGen(numeOriginal, numeSchimbat, lista)
 
 def showAll(lista):

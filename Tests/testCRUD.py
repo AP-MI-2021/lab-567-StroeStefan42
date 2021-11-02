@@ -50,10 +50,14 @@ def testStergeLibrarie():
     assert getById("1", lista) is None
     assert getById("2", lista) is not None
 
-    lista = stergeLibrarie("3", lista)
-
-    assert len(lista) == 1
-    assert getById("2", lista) is not None
+    try:
+        lista = stergeLibrarie("3", lista)
+        assert False
+    except ValueError:
+        assert len(lista) == 1
+        assert getById("2", lista) is not None
+    except Exception:
+        assert False
 
 
     lista = []
@@ -89,18 +93,20 @@ def testModificaLibrarie():
     assert getPret(librariaNeupdatata) == 20
     assert getReducere(librariaNeupdatata) == "silver"
 
+
     lista = []
     lista = adaugaLibrarie("1", "Baltagul", "Traditionalism", 15, "none", lista)
-
-    lista = modificaLibrarie("3", "Enigma Otiliei", "Realism", 5, "gold", lista)
-
-    librariaNeupdatata = getById("1", lista)
-    assert getId(librariaNeupdatata) == "1"
-    assert getTitlu(librariaNeupdatata) == "Baltagul"
-    assert getGen(librariaNeupdatata) == "Traditionalism"
-    assert getPret(librariaNeupdatata) == 15
-    assert getReducere(librariaNeupdatata) == "none"
-
+    try:
+        lista = modificaLibrarie("3", "Enigma Otiliei", "Realism", 5, "gold", lista)
+    except ValueError:
+        librariaNeupdatata = getById("1", lista)
+        assert getId(librariaNeupdatata) == "1"
+        assert getTitlu(librariaNeupdatata) == "Baltagul"
+        assert getGen(librariaNeupdatata) == "Traditionalism"
+        assert getPret(librariaNeupdatata) == 15
+        assert getReducere(librariaNeupdatata) == "none"
+    except Exception:
+        assert False
 
     lista = []
     lista = adaugaLibrarie("1", "Baltagul", "Traditionalism", 15, "none", lista)
