@@ -1,5 +1,6 @@
-from Tests.testCRUD import testAdaugaLibrarie, testStergeLibrarie, testModificaLibrarie
+from Tests.testCRUD import testAdaugaLibrarie, testStergeLibrarie, testModificaLibrarie, testGetById
 from Tests.testDomain import testLibrarie
+from Tests.testFunctionalitati import testDiscount
 
 
 def runAllTests():
@@ -7,3 +8,5 @@ def runAllTests():
     testAdaugaLibrarie()
     testStergeLibrarie()
     testModificaLibrarie()
+    testGetById()
+    testDiscount()

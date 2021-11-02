@@ -1,6 +1,21 @@
 from Domain.Librarie import getId, getTitlu, getGen, getReducere, getPret
 from Logic.CRUD import adaugaLibrarie, getById, stergeLibrarie, modificaLibrarie
 
+def testGetById():
+    lista = []
+    lista = adaugaLibrarie("1", "Baltagul", "Traditionalism", 15, "none", lista)
+    lista = adaugaLibrarie("2", "Ion", "Realism", 20, "silver", lista)
+    assert getById("1", lista) is not None
+    assert getById("2", lista) is not None
+    assert getById("3", lista) is None
+    assert getById("4", lista) is None
+
+    lista2 = []
+    lista2 = adaugaLibrarie("1", "Baltagul", "Traditionalism", 15, "none", lista2)
+    lista2 = adaugaLibrarie("3", "Ion", "Realism", 20, "silver", lista2)
+    assert getById("1", lista2) is not None
+    assert getById("2", lista2) is None
+    assert getById("3", lista2) is not None
 
 def testAdaugaLibrarie():
     lista = []
