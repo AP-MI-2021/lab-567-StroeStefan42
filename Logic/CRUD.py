@@ -1,4 +1,4 @@
-from Domain.Librarie import creeazaLibrarie, getId
+from Domain.Librarie2 import creeazaLibrarie, getId
 
 
 def adaugaLibrarie(id, titlu, gen, pret, reducere, lista):
@@ -7,8 +7,8 @@ def adaugaLibrarie(id, titlu, gen, pret, reducere, lista):
     librarie = creeazaLibrarie(id, titlu, gen, pret, reducere)
     return lista + [librarie]
 
-def getById(id, lista):
-    for librarie in lista:
+def getById(id, librarii):
+    for librarie in librarii:
         if getId(librarie) == id:
             return librarie
     return None

@@ -1,4 +1,4 @@
-from Domain.Librarie import creeazaLibrarie, getId, getTitlu, getGen, getPret, getReducere
+from Domain.Librarie2 import creeazaLibrarie, getId, getTitlu, getGen, getPret, getReducere
 
 
 def testLibrarie():

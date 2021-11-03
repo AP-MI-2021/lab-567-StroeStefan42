@@ -1,4 +1,4 @@
-from Domain.Librarie import getPret, getGen
+from Domain.Librarie2 import getPret, getGen
 from Logic.CRUD import getById, adaugaLibrarie
 from Logic.functionalitate import discount, modificareGen
 
@@ -20,7 +20,7 @@ def testModificareGen():
     lista = adaugaLibrarie("2", "Ion", "Realism", 20, "silver", lista)
     lista = adaugaLibrarie("3", "Enigma Otiliei", "Realism", 25, "gold", lista)
 
-    lista = modificareGen("Realism", "Interbelic", lista)
+    lista = modificareGen("Ion", "Interbelic", lista)
 
     assert getGen(getById("1", lista)) == "Traditionalism"
     assert getGen(getById("2", lista)) == "Interbelic"

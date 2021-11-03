@@ -1,4 +1,4 @@
-from Domain.Librarie import getId, creeazaLibrarie, getGen, getTitlu, getPret, getReducere
+from Domain.Librarie2 import getId, creeazaLibrarie, getGen, getTitlu, getPret, getReducere
 
 def discount(lista):
     listaNoua=[]
