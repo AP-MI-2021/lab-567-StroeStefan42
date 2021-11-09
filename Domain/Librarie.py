@@ -1,14 +1,6 @@
 
 def creeazaLibrarie(id, titlu, gen, pret, reducere):
-    list=[]
-    list.append(id)
-    list.append(titlu)
-    list.append(gen)
-    list.append(pret)
-    list.append(reducere)
-    return list
-
-
+    return [str(id), str(titlu), str(gen), pret, str(reducere)]
 
 def getId(librarie):
     return librarie[0]

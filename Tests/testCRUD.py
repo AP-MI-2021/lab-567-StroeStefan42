@@ -1,4 +1,4 @@
-from Domain.Librarie2 import getId, getTitlu, getGen, getReducere, getPret
+from Domain.Librarie import getId, getTitlu, getGen, getReducere, getPret
 from Logic.CRUD import adaugaLibrarie, getById, stergeLibrarie, modificaLibrarie
 
 def testGetById():
