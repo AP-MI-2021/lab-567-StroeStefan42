@@ -1,5 +1,6 @@
-from Domain.Librarie import getId
-from Logic.CRUD import adaugaLibrarie
+from Domain.Librarie import getId, getGen, getPret
+from Logic.CRUD import adaugaLibrarie, getById
+from Logic.functionalitate import modificareGen, discount, ordonareDupaPret
 
 
 def test_undo_redo():
@@ -160,3 +161,127 @@ def test_undo_redo():
     assert len(lista) == 2
     assert len(redo_list) == 0
     assert len(undo_list) == 2
+
+def test_undo_redo_modificare_gen():
+    # 1. lista goala
+    lista = []
+    undo_list = []
+    redo_list = []
+
+    # 2. se adauga prima librarie
+    rezultat = adaugaLibrarie("1", "Baltagul", "Traditionalism", 15, "none", lista)
+    undo_list.append(lista)
+    lista = rezultat
+
+    # 3. se adauga a doua librarie
+    rezultat = adaugaLibrarie("2", "Ion", "Realism", 25, "silver", lista)
+    undo_list.append(lista)
+    lista = rezultat
+
+    # 4. se adauga a treia librarie
+    rezultat = adaugaLibrarie("3", "Enigma Otiliei", "Realism", 20, "gold", lista)
+    undo_list.append(lista)
+    lista = rezultat
+
+    # 5. se modifica genul
+    rezultat = modificareGen("Baltagul", "Realism", lista)
+    undo_list.append(lista)
+    lista = rezultat
+    assert getGen(getById("1", lista)) == "Realism"
+
+    # 6. primul undo intoarce la genul original
+    redo_list.append(lista)
+    lista = undo_list.pop()
+    assert getGen(getById("1", lista)) == "Traditionalism"
+
+    # 7. se face redo
+    undo_list.append(lista)
+    lista = redo_list.pop()
+    assert getGen(getById("1", lista)) == "Realism"
+
+
+def test_undo_redo_discount():
+    # 1. lista goala
+    lista = []
+    undo_list = []
+    redo_list = []
+
+    # 2. se adauga prima librarie
+    rezultat = adaugaLibrarie("1", "Baltagul", "Traditionalism", 15, "none", lista)
+    undo_list.append(lista)
+    lista = rezultat
+
+    # 3. se adauga a doua librarie
+    rezultat = adaugaLibrarie("2", "Ion", "Realism", 25, "silver", lista)
+    undo_list.append(lista)
+    lista = rezultat
+
+    # 4. se adauga a treia librarie
+    rezultat = adaugaLibrarie("3", "Enigma Otiliei", "Realism", 20, "gold", lista)
+    undo_list.append(lista)
+    lista = rezultat
+
+    # 5. se aplica discountul
+    rezultat = discount(lista)
+    undo_list.append(lista)
+    lista = rezultat
+    assert getPret(getById("1", lista)) == 15
+    assert getPret(getById("2", lista)) == 23.75
+    assert getPret(getById("3", lista)) == 18.0
+
+    # 6. primul undo intoarce la genul original
+    redo_list.append(lista)
+    lista = undo_list.pop()
+    assert getPret(getById("1", lista)) == 15
+    assert getPret(getById("2", lista)) == 25
+    assert getPret(getById("3", lista)) == 20
+
+    # 7. se face redo
+    undo_list.append(lista)
+    lista = redo_list.pop()
+    assert getPret(getById("1", lista)) == 15
+    assert getPret(getById("2", lista)) == 23.75
+    assert getPret(getById("3", lista)) == 18.0
+
+def test_undo_redo_OrdonareDupaPret():
+    # 1. lista goala
+    lista = []
+    undo_list = []
+    redo_list = []
+
+    # 2. se adauga prima librarie
+    rezultat = adaugaLibrarie("1", "Baltagul", "Traditionalism", 15, "none", lista)
+    undo_list.append(lista)
+    lista = rezultat
+
+    # 3. se adauga a doua librarie
+    rezultat = adaugaLibrarie("2", "Ion", "Realism", 25, "silver", lista)
+    undo_list.append(lista)
+    lista = rezultat
+
+    # 4. se adauga a treia librarie
+    rezultat = adaugaLibrarie("3", "Enigma Otiliei", "Realism", 20, "gold", lista)
+    undo_list.append(lista)
+    lista = rezultat
+
+    # 5. se ordoneaza lista
+    rezultat = ordonareDupaPret(lista)
+    undo_list.append(lista)
+    lista = rezultat
+    assert getId(lista[0]) == "1"
+    assert getId(lista[1]) == "3"
+    assert getId(lista[2]) == "2"
+
+    # 6. primul undo intoarce la lista originala
+    redo_list.append(lista)
+    lista = undo_list.pop()
+    assert getId(lista[0]) == "1"
+    assert getId(lista[1]) == "2"
+    assert getId(lista[2]) == "3"
+
+    # 7. se face redo
+    undo_list.append(lista)
+    lista = redo_list.pop()
+    assert getId(lista[0]) == "1"
+    assert getId(lista[1]) == "3"
+    assert getId(lista[2]) == "2"
